@@ -5,6 +5,8 @@ function trainAccuracy = forwardPass (x_train, CNNtable, batch_size)
     x = convolution(x, CNNtable, "layer1");
     x = pooling(x);
     x = convolution(x, CNNtable, "layer2");
+    x = pooling(x);
+    x = convolution(x, CNNtable, "layer3");
   endfor
   trainAccuracy = x;
   
