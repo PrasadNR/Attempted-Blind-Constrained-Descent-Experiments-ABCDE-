@@ -4,10 +4,7 @@ function featureMaps = pooling (inputMaps, maxpoolHeight = 2, maxpoolWidth = 2)
   outputSizeW = ceil(size(inputMaps, 2) / maxpoolWidth);
   featureMaps = zeros(outputSizeH, outputSizeW, size(inputMaps, 3));
   
-##  maxpool = @(block_struct) max(block_struct(:));
-##  
   for i = 1:size(inputMaps, 3)
-    ## featureMaps(:, :, i) = blockproc(inputMaps(:, :, i), [maxpoolHeight, maxpoolWidth], maxpool);
     zerosFilter = zeros(outputSizeH * maxpoolHeight, outputSizeW * maxpoolWidth);
     eachFilter = inputMaps(:, :, i);
     zerosFilter(1:size(eachFilter, 1), 1:size(eachFilter, 2)) = eachFilter;
@@ -23,7 +20,5 @@ function featureMaps = pooling (inputMaps, maxpoolHeight = 2, maxpoolWidth = 2)
     
     featureMaps(:, :, i) = max(outputFilter, [], 3);
   endfor
-
-##  featureMaps = inputMaps(1:maxpoolHeight:end, 1:maxpoolWidth:end, :);
 
 endfunction
