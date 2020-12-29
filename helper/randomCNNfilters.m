@@ -1,4 +1,4 @@
-function CNNtable = initialiseNetwork ()
+function CNNtable = randomCNNfilters ()
 
   CNNtable = struct();
   CNNtable.layer1 =  unifrnd(-1, 1, [5, 5, 6]);
