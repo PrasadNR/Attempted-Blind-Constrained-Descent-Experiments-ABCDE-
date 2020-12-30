@@ -6,7 +6,7 @@ addpath("helper");
 cifar10 = load(fullfile(dataFolder, "cifar10.mat"));
 mnist = load(fullfile(dataFolder, "mnist.mat"));
 
-x_train10 = cifar10.x_train; y_train10 = cifar10.y_train;
+x_train10 = cifar10.x_train; y_train10 = cifar10.y_train + 1;
 maxTrainAccuracy = 0; Nepochs = 100;
 savedCNNtable = randomCNNfilters();
 
@@ -27,7 +27,7 @@ toc;
 
 save("outputs/cifar10CNNtable.mat", "savedCNNtable");
 
-x_train_mnist = mnist.x_train; y_train_mnist = mnist.y_train;
+x_train_mnist = mnist.x_train; y_train_mnist = mnist.y_train + 1;
 x_train_mnist = padarray(x_train_mnist, [0, 2, 2]);
 maxTrainAccuracy = 0; tic;
 for i = 1:Nepochs

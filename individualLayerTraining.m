@@ -5,7 +5,7 @@ addpath("helper");
 
 mnist = load(fullfile(dataFolder, "mnist.mat"));
 
-x_train_MNIST = mnist.x_train; y_train_MNIST = mnist.y_train;
+x_train_MNIST = mnist.x_train; y_train_MNIST = mnist.y_train + 1;
 x_train_MNIST = padarray(x_train_MNIST, [0, 2, 2]);
 maxTrainAccuracy = 0; Nepochs = 1000;
 savedCNNtable = randomCNNfilters(); CNNtable = randomCNNfilters();
