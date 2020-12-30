@@ -28,6 +28,7 @@ toc;
 save("outputs/cifar10CNNtable.mat", "savedCNNtable");
 
 x_train_mnist = mnist.x_train; y_train_mnist = mnist.y_train;
+x_train_mnist = padarray(x_train_mnist, [0, 2, 2]);
 maxTrainAccuracy = 0; tic;
 for i = 1:Nepochs
   [x_train, y_train] = pickRandomTrainData(x_train_mnist, y_train_mnist, batch_size = 16);
@@ -41,7 +42,7 @@ for i = 1:Nepochs
 end
 toc;
 
-save("outputs/cifar100CNNtable.mat", "savedCNNtable");
+save("outputs/mnistCNNtable.mat", "savedCNNtable");
 
 plot(cifar10plot);
 hold on;
@@ -50,4 +51,3 @@ hold off;
 title("Plain Blind CNN Descent with uniform distribution");
 xlabel("Epochs"); ylabel("Training Accuracy %");
 legend("CIFAR-10", "MNIST");
-savefig("outputs/uniformDistribution.jpg");
