@@ -7,9 +7,7 @@ function trainAccuracy = forwardPass (x_train, y_train, CNNtable, batch_size)
     x = pooling(x);
     x = convolution(x, CNNtable, "layer2");
     x = pooling(x);
-    x = convolution(x, CNNtable, "layer3", activation = false);
-    x = convolution(x, CNNtable, "layer4", activation = false);
-    x = convolution(x, CNNtable, "layer5");
+    x = convolution(x, CNNtable, "layer3");
     
     [~, y_predict_each] = max(x);
     if y_predict_each == y_train(i)

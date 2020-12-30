@@ -16,7 +16,7 @@ tic;
 for i = 1:Nepochs
   [x_train, y_train] = pickRandomTrainData(x_train_MNIST, y_train_MNIST, batch_size = 64);
   CNNtable = randomCNNfilters();
-  CNNtable = randomFreeze (freezeFactor = 0.75, CNNtable, savedCNNtable);
+  CNNtable = layerByLayer (i, CNNtable, savedCNNtable);
   trainAccuracy = forwardPass(x_train, y_train, CNNtable, batch_size);
   if trainAccuracy > maxTrainAccuracy
     maxTrainAccuracy = trainAccuracy;
