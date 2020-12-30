@@ -7,7 +7,7 @@ mnist = load(fullfile(dataFolder, "mnist.mat"));
 
 x_train_MNIST = mnist.x_train; y_train_MNIST = mnist.y_train;
 x_train_MNIST = padarray(x_train_MNIST, [0, 2, 2]);
-maxTrainAccuracy = 0; Nepochs = 100;
+maxTrainAccuracy = 0; Nepochs = 1000;
 savedCNNtable = randomCNNfilters(); CNNtable = randomCNNfilters();
 
 MNISTplot = zeros(1, Nepochs);
@@ -15,7 +15,7 @@ MNISTplot = zeros(1, Nepochs);
 tic;
 for i = 1:Nepochs
   [x_train, y_train] = pickRandomTrainData(x_train_MNIST, y_train_MNIST, batch_size = 64);
-  CNNtable = randomCNNfilters();
+  CNNtable = normalCNNfilters(lr = 0.01, savedCNNtable);
   CNNtable = randomFreeze (freezeFactor = 0.75, CNNtable, savedCNNtable);
   trainAccuracy = forwardPass(x_train, y_train, CNNtable, batch_size);
   if trainAccuracy > maxTrainAccuracy

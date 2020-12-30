@@ -14,7 +14,7 @@ cifar10plot = zeros(1, Nepochs); MNISTplot = zeros(1, Nepochs);
 
 tic;
 for i = 1:Nepochs
-  [x_train, y_train] = pickRandomTrainData(x_train10, y_train10, batch_size = 64);
+  [x_train, y_train] = pickRandomTrainData(x_train10, y_train10, batch_size = 16);
   CNNtable = randomCNNfilters();
   trainAccuracy = forwardPass(x_train, y_train, CNNtable, batch_size);
   if trainAccuracy > maxTrainAccuracy
@@ -30,7 +30,7 @@ save("outputs/cifar10CNNtable.mat", "savedCNNtable");
 x_train_mnist = mnist.x_train; y_train_mnist = mnist.y_train;
 maxTrainAccuracy = 0; tic;
 for i = 1:Nepochs
-  [x_train, y_train] = pickRandomTrainData(x_train_mnist, y_train_mnist, batch_size = 256);
+  [x_train, y_train] = pickRandomTrainData(x_train_mnist, y_train_mnist, batch_size = 16);
   CNNtable = randomCNNfilters();
   trainAccuracy = forwardPass(x_train, y_train, CNNtable, batch_size);
   if trainAccuracy > maxTrainAccuracy
