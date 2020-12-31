@@ -7,12 +7,11 @@ cifar10 = load(fullfile(dataFolder, "cifar10.mat"));
 mnist = load(fullfile(dataFolder, "mnist.mat"));
 
 x_train10 = cifar10.x_train; y_train10 = cifar10.y_train + 1;
-Nepochs = 40; batch_size = 64;
-savedCNNtable = randomCNNfilters();
+Nepochs = 10; batch_size = 16;
 [x_train, y_train] = shuffle(x_train10, y_train10);
 
-CNNtable = randomCNNfilters(); lr = 0.001;
-count = 0;
+lr = 0.001; CNNtable = initialNormalCNNfilters(lr);
+savedCNNtable = initialNormalCNNfilters(lr); count = 0;
 for i = 1:Nepochs
   for j = 1:(floor(size(x_train, 1) / batch_size) - 1)
     count = count + 1;
@@ -40,7 +39,7 @@ toc;
 
 x_train_mnist = mnist.x_train; y_train_mnist = mnist.y_train + 1;
 x_train_mnist = padarray(x_train_mnist, [0, 2, 2]);
-CNNtable = randomCNNfilters();
+CNNtable = initialNormalCNNfilters(lr); savedCNNtable = initialNormalCNNfilters(lr);
 tic; minLoss = Inf; savedTrainAccuracy = 0; count = 0;
 for i = 1:Nepochs
   for j = 1:(floor(size(x_train, 1) / batch_size) - 1)
