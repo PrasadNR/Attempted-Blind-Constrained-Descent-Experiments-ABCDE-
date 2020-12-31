@@ -7,7 +7,7 @@ cifar10 = load(fullfile(dataFolder, "cifar10.mat"));
 mnist = load(fullfile(dataFolder, "mnist.mat"));
 
 x_train10 = cifar10.x_train; y_train10 = cifar10.y_train + 1;
-Nepochs = 2; batch_size = 16;
+Nepochs = 40; batch_size = 64;
 savedCNNtable = randomCNNfilters();
 [x_train, y_train] = shuffle(x_train10, y_train10);
 
@@ -63,6 +63,6 @@ plot(cifar10plot);
 hold on;
 plot(MNISTplot);
 hold off;
-title("Blind CNN Descent with uniform distribution");
+title("Blind CNN Descent with normal distribution");
 xlabel("Batches"); ylabel("Training Accuracy %");
 legend("CIFAR-10", "MNIST");
