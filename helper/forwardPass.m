@@ -1,6 +1,6 @@
-function trainAccuracy = forwardPass (x_train, y_train, CNNtable, batch_size)
+function [trainAccuracy, trainLoss] = forwardPass (x_train, y_train, CNNtable, batch_size)
 
-  trainAccuracy = 0;
+  trainAccuracy = 0; trainLoss = 0;
   for i = 1:batch_size
     x = reshape(x_train(i, :, :, :), size(x_train, 2), size(x_train, 3), size(x_train, 4));
     x = convolution(x, CNNtable, "layer1", activation = false);
@@ -13,6 +13,8 @@ function trainAccuracy = forwardPass (x_train, y_train, CNNtable, batch_size)
     if y_predict_each == y_train(i)
       trainAccuracy = trainAccuracy + 1;
     endif
+    
+    trainLoss = trainLoss + (y_predict_each - y_train(i)) ^ 2;
   endfor
   
   trainAccuracy = trainAccuracy / batch_size;
