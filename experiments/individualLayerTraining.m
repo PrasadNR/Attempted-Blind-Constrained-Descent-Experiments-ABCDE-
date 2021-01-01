@@ -1,11 +1,12 @@
 clc; close; clear;
 
-dataFolder = "D:\\postCompletion\\research\\data";
-addpath("helper");
+mainFolder = "D:\\postCompletion\\research";
+dataFolder = fullfile(mainFolder, "data");
+addpath(fullfile(mainFolder, "Accelerated-Blind-CNN-Descent-ABCD-", "helper"));
 
 mnist = load(fullfile(dataFolder, "mnist.mat"));
 
-x_train_MNIST = mnist.x_train; y_train_MNIST = mnist.y_train + 1;
+x_train_MNIST = mnist.x_train / 255; y_train_MNIST = mnist.y_train + 1;
 x_train_MNIST = padarray(x_train_MNIST, [0, 2, 2]);
 Nepochs = 2; batch_size = 16;
 savedCNNtable = randomCNNfilters(); CNNtable = randomCNNfilters();

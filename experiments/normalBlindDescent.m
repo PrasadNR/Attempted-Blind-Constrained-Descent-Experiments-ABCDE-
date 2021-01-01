@@ -1,12 +1,13 @@
 clc; close; clear;
 
-dataFolder = "D:\\postCompletion\\research\\data";
-addpath("helper");
+mainFolder = "D:\\postCompletion\\research";
+dataFolder = fullfile(mainFolder, "data");
+addpath(fullfile(mainFolder, "Accelerated-Blind-CNN-Descent-ABCD-", "helper"));
 
 cifar10 = load(fullfile(dataFolder, "cifar10.mat"));
 mnist = load(fullfile(dataFolder, "mnist.mat"));
 
-x_train10 = cifar10.x_train; y_train10 = cifar10.y_train + 1;
+x_train10 = cifar10.x_train / 255; y_train10 = cifar10.y_train + 1;
 Nepochs = 10; batch_size = 16;
 [x_train, y_train] = shuffle(x_train10, y_train10);
 
@@ -37,7 +38,7 @@ for i = 1:Nepochs
 endfor
 toc;
 
-x_train_mnist = mnist.x_train; y_train_mnist = mnist.y_train + 1;
+x_train_mnist = mnist.x_train / 255; y_train_mnist = mnist.y_train + 1;
 x_train_mnist = padarray(x_train_mnist, [0, 2, 2]);
 CNNtable = initialNormalCNNfilters(lr); savedCNNtable = initialNormalCNNfilters(lr);
 tic; minLoss = Inf; savedTrainAccuracy = 0; count = 0;
