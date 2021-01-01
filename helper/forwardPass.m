@@ -1,4 +1,4 @@
-function [trainAccuracy, trainLoss] = forwardPass (x_train, y_train, CNNtable, batch_size)
+function [trainAccuracy, trainLoss] = forwardPass (x_train, y_train, CNNtable, batch_size, numberOfClasses)
 
   trainAccuracy = 0; trainLoss = 0;
   for i = 1:batch_size
@@ -7,14 +7,15 @@ function [trainAccuracy, trainLoss] = forwardPass (x_train, y_train, CNNtable, b
     x = pooling(x);
     x = convolution(x, CNNtable, "layer2");
     x = pooling(x);
-    x = convolution(x, CNNtable, "layer3");
+    x = convolution(x, CNNtable, "layer3", activation = false);
+    predictions = reshape(x, numberOfClasses, 1);
     
-    [~, y_predict_each] = max(x);
+    [~, y_predict_each] = max(predictions);
     if y_predict_each == y_train(i)
       trainAccuracy = trainAccuracy + 1;
     endif
     
-    trainLoss = trainLoss + (y_predict_each - y_train(i)) ^ 2;
+    trainLoss = trainLoss + softmaxCEloss(y_train(i), predictions);
   endfor
   
   trainAccuracy = trainAccuracy / batch_size;

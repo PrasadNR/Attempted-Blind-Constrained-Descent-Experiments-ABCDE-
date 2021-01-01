@@ -6,7 +6,7 @@ addpath(fullfile(mainFolder, "Accelerated-Blind-CNN-Descent-ABCD-", "helper"));
 
 mnist = load(fullfile(dataFolder, "mnist.mat"));
 
-x_train_MNIST = mnist.x_train / 255; y_train_MNIST = mnist.y_train + 1;
+x_train_MNIST = mnist.x_train / 255; y_train_MNIST = (mnist.y_train + 1)';
 x_train_MNIST = padarray(x_train_MNIST, [0, 2, 2]);
 Nepochs = 2; batch_size = 16;
 savedCNNtable = randomCNNfilters(); CNNtable = randomCNNfilters();
@@ -28,7 +28,7 @@ for i = 1:Nepochs
     x_train_batch = x_train(idx, :, :, :); y_train_batch = y_train(idx);
     CNNtable = normalCNNfilters(lr = 0.001, savedCNNtable);
     CNNtable = layerByLayer (i, CNNtable, savedCNNtable);
-    [trainAccuracy, trainLoss] = forwardPass(x_train_batch, y_train_batch, CNNtable, batch_size);
+    [trainAccuracy, trainLoss] = forwardPass(x_train_batch, y_train_batch, CNNtable, batch_size, numberOfClasses);
     if trainLoss < minLoss
       minLoss = trainLoss;
       savedTrainAccuracy = trainAccuracy;
