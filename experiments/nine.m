@@ -77,4 +77,4 @@ saveStruct.MNISTtrainAccuracyPlot = MNISTtrainAccuracyPlot;
 saveStruct.MNISTtrainLossPlot = MNISTtrainLossPlot;
 saveStruct.MNIST_CNN = savedCNNtable;
 
-save("outputs/nine.mat", "saveStruct");
+save(fullfile(mainFolder, "Accelerated-Blind-CNN-Descent-ABCD-", "outputs", "nine.mat"), "saveStruct");
