@@ -4,7 +4,7 @@ function loss = softmaxCEloss (trueLabel, predictions)
   shiftedPredictions = stdPredictions - max(stdPredictions);
   expPredictions = exp(shiftedPredictions);
   softmaxPredictions = expPredictions / sum(expPredictions);
-  logPredictions = log(predictions);
+  logPredictions = log(softmaxPredictions);
   loss = -logPredictions(trueLabel);
   
 endfunction
