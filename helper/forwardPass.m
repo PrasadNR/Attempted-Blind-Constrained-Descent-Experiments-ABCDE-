@@ -8,7 +8,7 @@ function [trainAccuracy, trainLoss] = forwardPass (x_train, y_train, CNNtable, b
     x = convolution(x, CNNtable, "layer2");
     x = pooling(x);
     x = convolution(x, CNNtable, "layer3", activation = false);
-    predictions = reshape(x, numberOfClasses, 1);
+    predictions = reshape(x, 1, numberOfClasses);
     
     [~, y_predict_each] = max(predictions);
     if y_predict_each == y_train(i)
