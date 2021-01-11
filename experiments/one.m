@@ -49,6 +49,7 @@ saveStruct.cifar10CNN = savedCNNtable;
 
 x_train_mnist = mnist.x_train / 255; y_train_mnist = (mnist.y_train + 1)';
 x_train_mnist = padarray(x_train_mnist, [0, 2, 2]);
+[x_train, y_train] = shuffle(x_train_mnist, y_train_mnist);
 
 CNNtable = randomCNNfilters(); savedCNNtable = randomCNNfilters();
 tic; minLoss = Inf; savedTrainAccuracy = 0; count = 0;
